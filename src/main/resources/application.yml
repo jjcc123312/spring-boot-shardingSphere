@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: shardingSphere-jdbc-study
+  shardingsphere:
+    mode:
+      type:
+
+# mybatis-plus 配置内容
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 虽然默认为 true ，但是还是显示去指定下。
+  global-config:
+    db-config:
+      id-type: none # 虽然 MyBatis Plus 也提供 ID 生成策略，但是还是使用 Sharding-JDBC 的
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  mapper-locations: classpath*:mapper/*.xml
