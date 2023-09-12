@@ -1,8 +1,10 @@
 package com.study.orm.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * <p>
@@ -13,6 +15,7 @@ import java.io.Serializable;
  * @since 2023-08-29
  */
 @TableName("order_info")
+@Data
 public class OrderInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,7 +23,7 @@ public class OrderInfo implements Serializable {
     /**
      * 订单详情号
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long orderInfoId;
 
     /**
@@ -38,45 +41,4 @@ public class OrderInfo implements Serializable {
      */
     private Integer shopingPrice;
 
-    public Long getOrderInfoId() {
-        return orderInfoId;
-    }
-
-    public void setOrderInfoId(Long orderInfoId) {
-        this.orderInfoId = orderInfoId;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getShopingName() {
-        return shopingName;
-    }
-
-    public void setShopingName(String shopingName) {
-        this.shopingName = shopingName;
-    }
-
-    public Integer getShopingPrice() {
-        return shopingPrice;
-    }
-
-    public void setShopingPrice(Integer shopingPrice) {
-        this.shopingPrice = shopingPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderInfo{" +
-            "orderInfoId = " + orderInfoId +
-            ", orderId = " + orderId +
-            ", shopingName = " + shopingName +
-            ", shopingPrice = " + shopingPrice +
-        "}";
-    }
 }

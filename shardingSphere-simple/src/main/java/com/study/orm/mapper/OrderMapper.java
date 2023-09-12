@@ -1,6 +1,6 @@
 package com.study.orm.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.yulichang.base.MPJBaseMapper;
 import com.study.orm.entity.Order;
 
 /**
@@ -11,6 +11,7 @@ import com.study.orm.entity.Order;
  * @author leo.ZSLong
  * @since 2023-08-29
  */
-public interface OrderMapper extends BaseMapper<Order> {
+public interface OrderMapper extends MPJBaseMapper<Order> {
 
+    int insertSelective(Order record);
 }

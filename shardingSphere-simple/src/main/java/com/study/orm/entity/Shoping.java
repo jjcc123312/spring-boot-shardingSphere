@@ -1,8 +1,12 @@
 package com.study.orm.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -13,6 +17,9 @@ import java.io.Serializable;
  * @since 2023-08-29
  */
 @TableName("shoping")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Shoping implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,7 +27,7 @@ public class Shoping implements Serializable {
     /**
      * 商品id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long shopingId;
 
     /**
@@ -33,36 +40,4 @@ public class Shoping implements Serializable {
      */
     private Integer shopingPrice;
 
-    public Long getShopingId() {
-        return shopingId;
-    }
-
-    public void setShopingId(Long shopingId) {
-        this.shopingId = shopingId;
-    }
-
-    public String getShopingName() {
-        return shopingName;
-    }
-
-    public void setShopingName(String shopingName) {
-        this.shopingName = shopingName;
-    }
-
-    public Integer getShopingPrice() {
-        return shopingPrice;
-    }
-
-    public void setShopingPrice(Integer shopingPrice) {
-        this.shopingPrice = shopingPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "Shoping{" +
-            "shopingId = " + shopingId +
-            ", shopingName = " + shopingName +
-            ", shopingPrice = " + shopingPrice +
-        "}";
-    }
 }

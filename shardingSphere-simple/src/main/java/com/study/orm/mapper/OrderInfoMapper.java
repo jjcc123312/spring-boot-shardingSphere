@@ -1,6 +1,6 @@
 package com.study.orm.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.yulichang.base.MPJBaseMapper;
 import com.study.orm.entity.OrderInfo;
 
 /**
@@ -11,6 +11,6 @@ import com.study.orm.entity.OrderInfo;
  * @author leo.ZSLong
  * @since 2023-08-29
  */
-public interface OrderInfoMapper extends BaseMapper<OrderInfo> {
+public interface OrderInfoMapper extends MPJBaseMapper<OrderInfo> {
 
 }

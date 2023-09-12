@@ -19,9 +19,12 @@
     <java.version>1.8</java.version>
     <spring-boot.version>2.7.15</spring-boot.version>
     <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+    <mybatis-plus-join.version>1.4.6</mybatis-plus-join.version>
     <shardingsphere.version>5.2.1</shardingsphere.version>
     <mysql.version>8.0.33</mysql.version>
     <druid.version>1.2.8</druid.version>
+    <fastjson.version>2.0.40</fastjson.version>
+    <hutool.version>5.8.18</hutool.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -51,17 +54,35 @@
       </dependency>
 
       <!-- mysql drive -->
-<!--      <dependency>-->
-<!--        <groupId>mysql</groupId>-->
-<!--        <artifactId>mysql-connector-java</artifactId>-->
-<!--        <version>${mysql.version}</version>-->
-<!--      </dependency>-->
+      <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
 
       <!-- druid数据连接池 -->
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.yulichang</groupId>
+        <artifactId>mybatis-plus-join-boot-starter</artifactId>
+        <version>${mybatis-plus-join.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
       </dependency>
 
     </dependencies>
@@ -107,6 +128,10 @@
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.yulichang</groupId>
+      <artifactId>mybatis-plus-join-boot-starter</artifactId>
+    </dependency>
 
     <!--shardingSphere jdbc start -->
     <dependency>
@@ -116,9 +141,8 @@
 
     <!-- mysql drive -->
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.31</version>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
     </dependency>
 
     <!-- druid数据连接池 -->
@@ -139,6 +163,18 @@
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
       <version>1.33</version>
+    </dependency>
+
+    <!-- fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+    </dependency>
+
+    <!-- util package -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
     </dependency>
 
   </dependencies>

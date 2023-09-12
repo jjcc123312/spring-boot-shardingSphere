@@ -1,7 +1,10 @@
 package com.study.orm.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * <p>
@@ -11,6 +14,8 @@ import java.io.Serializable;
  * @author leo.ZSLong
  * @since 2023-08-29
  */
+@Data
+@TableName("order_tab")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,7 +23,7 @@ public class Order implements Serializable {
     /**
      * 订单号
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long orderId;
 
     /**
@@ -30,37 +35,4 @@ public class Order implements Serializable {
      * 用戶id
      */
     private Long userId;
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getOrderPrice() {
-        return orderPrice;
-    }
-
-    public void setOrderPrice(Integer orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-            "orderId = " + orderId +
-            ", orderPrice = " + orderPrice +
-            ", userId = " + userId +
-        "}";
-    }
 }
