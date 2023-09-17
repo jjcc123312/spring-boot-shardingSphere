@@ -56,7 +56,7 @@ spring:
         tables:
           # 首先配置商品表的分片策略
           shoping:
-            # 声明商品表所在的真实数据节点（这里先显式声明一个节点测试）
+            # 声明商品表所在的真实数据节点
 #            actual-data-nodes: ds0.shoping_00,ds0.shoping_01,ds1.shoping_00,ds1.shoping_01
 #            inline表达式，使用笛卡尔积算法生成结果：ds0.shoping_00,ds0.shoping_01,ds1.shoping_00,ds1.shoping_01
             actual-data-nodes: ds$->{0..1}.shoping_0$->{0..1}
