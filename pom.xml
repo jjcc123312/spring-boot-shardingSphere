@@ -12,6 +12,7 @@
 
   <modules>
     <module>shardingSphere-simple</module>
+    <module>shardingSphere-sharding-algorithm</module>
   </modules>
   <packaging>pom</packaging>
 
