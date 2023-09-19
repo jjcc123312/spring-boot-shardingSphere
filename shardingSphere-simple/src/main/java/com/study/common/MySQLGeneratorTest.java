@@ -55,10 +55,10 @@ public class MySQLGeneratorTest extends BaseGeneratorTest {
             .packageConfig(builder -> {
                 builder.parent("com.study") // 设置父包名
                     .moduleName("") // 设置父包模块名
-                    .pathInfo(Collections.singletonMap(OutputFile.xml, "D://")); // 设置mapperXml生成路径
+                    .pathInfo(Collections.singletonMap(OutputFile.xml, "D:/codeGen/mybatis")); // 设置mapperXml生成路径
             })
             .strategyConfig(builder -> {
-                builder.addInclude("order,order_info,shoping_00,shoping_01,user_info") // 设置需要生成的表名
+                builder.addInclude("volume_range_1") // 设置需要生成的表名
                     .addTablePrefix("t_", "c_"); // 设置过滤表前缀
             })
             .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

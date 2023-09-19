@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Leo
  * @version 1.0 2023/9/11
  */
-public class UserTest extends ShardingSphereSimpleApplicationTests {
+public class UserTest extends BaseTests {
 
     @Autowired
     private IUserInfoService userInfoService;

@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 1.0 2023/9/10
  */
 @Slf4j
-public class OrderTest extends ShardingSphereSimpleApplicationTests {
+public class OrderTest extends BaseTests {
 
     @Autowired
     private IOrderService orderService;

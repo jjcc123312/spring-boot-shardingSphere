@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Leo 
  */
 @Slf4j
-public class ShopingServiceImplTest extends ShardingSphereSimpleApplicationTests {
+public class ShopingServiceImplTest extends BaseTests {
 
     @Autowired
     private IShopingService shopingService;

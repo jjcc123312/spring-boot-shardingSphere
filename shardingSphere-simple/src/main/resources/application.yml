@@ -12,10 +12,10 @@ spring:
       type: Standalone
       repository:
         type: JDBC
-    # 配置多个数据源
     props:
       # 日志显示具体的SQL
       sql-show: true
+    # 配置多个数据源
     datasource:
 #      真实数据源名称
       names: ds0,ds1

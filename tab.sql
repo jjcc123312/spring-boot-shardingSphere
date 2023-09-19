@@ -65,3 +65,41 @@ engine = InnoDB
 character set = utf8
 collate = utf8_general_ci
 row_format = compact;
+
+
+-- >>>>>>>>>>创建分片容量的范围分片算法demo表<<<<<<<<<<<
+drop table if exists `volume_range_0`;
+create table `volume_range_0`  (
+  `order_id` bigint not null comment  '订单号',
+  `order_price` int(8) not null comment '订单总金额',
+  `user_id` bigint not null comment '用戶id',
+  primary key (`order_id`) using btree
+)
+engine = InnoDB
+character set = utf8
+collate = utf8_general_ci
+row_format = compact;
+
+drop table if exists `volume_range_1`;
+create table `volume_range_1`  (
+  `order_id` bigint not null comment  '订单号',
+  `order_price` int(8) not null comment '订单总金额',
+  `user_id` bigint not null comment '用戶id',
+  primary key (`order_id`) using btree
+)
+engine = InnoDB
+character set = utf8
+collate = utf8_general_ci
+row_format = compact;
+
+drop table if exists `volume_range_2`;
+create table `volume_range_2`  (
+  `order_id` bigint not null comment  '订单号',
+  `order_price` int(8) not null comment '订单总金额',
+  `user_id` bigint not null comment '用戶id',
+  primary key (`order_id`) using btree
+)
+engine = InnoDB
+character set = utf8
+collate = utf8_general_ci
+row_format = compact;
