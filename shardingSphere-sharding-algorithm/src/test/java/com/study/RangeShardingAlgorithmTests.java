@@ -1,6 +1,8 @@
 package com.study;
 
+import com.study.orm.entity.BoundaryRange;
 import com.study.orm.entity.VolumeRange;
+import com.study.orm.service.BoundaryRangeService;
 import com.study.orm.service.VolumeRangeService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,9 @@ public class RangeShardingAlgorithmTests extends BaseTests {
 
     @Autowired
     private VolumeRangeService volumeRangeService;
+
+    @Autowired
+    private BoundaryRangeService boundaryRangeService;
 
 
     /**
@@ -53,6 +58,33 @@ public class RangeShardingAlgorithmTests extends BaseTests {
             volumeRange.setUserId(1L);
             volumeRangeService.save(volumeRange);
         }
+    }
+
+    /**
+     * 基于分片边界的范围分片
+     */
+    @Test
+    public void boundaryRangeAlgorithm() {
+        BoundaryRange boundaryRange0 = new BoundaryRange();
+        boundaryRange0.setOrderPrice(-1);
+        boundaryRange0.setUserId(1L);
+        boundaryRangeService.save(boundaryRange0);
+
+        BoundaryRange boundaryRange1 = new BoundaryRange();
+        boundaryRange1.setOrderPrice(0);
+        boundaryRange1.setUserId(1L);
+        boundaryRangeService.save(boundaryRange1);
+
+        BoundaryRange boundaryRange2 = new BoundaryRange();
+        boundaryRange2.setOrderPrice(10);
+        boundaryRange2.setUserId(1L);
+        boundaryRangeService.save(boundaryRange2);
+
+        BoundaryRange boundaryRange3 = new BoundaryRange();
+        boundaryRange3.setOrderPrice(20);
+        boundaryRange3.setUserId(1L);
+        boundaryRangeService.save(boundaryRange3);
+
     }
 
 }

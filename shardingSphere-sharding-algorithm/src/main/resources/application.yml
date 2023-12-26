@@ -1,6 +1,6 @@
 logging:
   level:
-    com.study: debug
+    com.study: info
 
 spring:
   application:
@@ -68,6 +68,16 @@ spring:
                 sharding-column: order_price
                 # 分片容量的范围分片算法
                 sharding-algorithm-name: volume-range-algorithm
+          boundary_range:
+            actual-data-nodes: ds0.boundary_range$->{0..3}
+            key-generate-strategy:
+              column: order_id
+              key-generator-name: global-id-snowflake
+            table-strategy:
+              standard:
+                sharding-column: order_price
+                # 分片边界的范围分片算法
+                sharding-algorithm-name: boundary-range-algorithm
 
         sharding-algorithms:
           # 取模分片算法
@@ -85,6 +95,12 @@ spring:
               range-upper: 81
               # 每个分片的容量；每个分片容量最多 = (range-upper -1) / (单个库逻辑表的数量 - 1)
               sharding-volume: 27
+          # 基于分片边界的范围分片算法
+          boundary-range-algorithm:
+            type: BOUNDARY_RANGE
+            props:
+              sharding-ranges: 0,10,20
+
         key-generators:
           global-id-snowflake:
             type: SNOWFLAKE

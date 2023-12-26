@@ -103,3 +103,68 @@ engine = InnoDB
 character set = utf8
 collate = utf8_general_ci
 row_format = compact;
+
+drop table if exists `volume_range_3`;
+create table `volume_range_3`  (
+  `order_id` bigint not null comment  '订单号',
+  `order_price` int(8) not null comment '订单总金额',
+  `user_id` bigint not null comment '用戶id',
+  primary key (`order_id`) using btree
+)
+engine = InnoDB
+character set = utf8
+collate = utf8_general_ci
+row_format = compact;
+
+-- >>>>>>>>>>基于分片边界的范围分片算法demo表<<<<<<<<<<<
+drop table if exists `boundary_range0`;
+create table `boundary_range0`  (
+  `order_id` bigint not null comment  '订单号',
+  `order_price` int(8) not null comment '订单总金额',
+  `user_id` bigint not null comment '用戶id',
+  primary key (`order_id`) using btree
+)
+engine = InnoDB
+character set = utf8
+collate = utf8_general_ci
+row_format = compact;
+
+drop table if exists `boundary_range1`;
+create table `boundary_range1`  (
+  `order_id` bigint not null comment  '订单号',
+  `order_price` int(8) not null comment '订单总金额',
+  `user_id` bigint not null comment '用戶id',
+  primary key (`order_id`) using btree
+)
+engine = InnoDB
+character set = utf8
+collate = utf8_general_ci
+row_format = compact;
+
+CREATE TABLE `boundary_range2`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;
+
+CREATE TABLE `boundary_range3`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;
+
+
+
+
+
+
+
+

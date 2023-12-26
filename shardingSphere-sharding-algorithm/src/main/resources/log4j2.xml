@@ -8,7 +8,7 @@
   <Loggers>
     <Logger name="com.study" level="debug" />
 
-    <Root level="error">
+    <Root level="info">
       <AppenderRef ref="Console"/>
     </Root>
   </Loggers>
