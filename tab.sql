@@ -162,9 +162,58 @@ CREATE TABLE `boundary_range3`
   ROW_FORMAT = COMPACT;
 
 
+-- >>>>>>>>>>基于自动日期间隔的范围分片算法demo表<<<<<<<<<<<
+CREATE TABLE `auto_interval0`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    `create_gmt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;
 
+CREATE TABLE `auto_interval1`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    `create_gmt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;
 
+CREATE TABLE `auto_interval2`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    `create_gmt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;
 
+CREATE TABLE `auto_interval3`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    `create_gmt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;
 
-
-
+CREATE TABLE `auto_interval4`
+(
+    `order_id`    bigint NOT NULL COMMENT '订单号',
+    `order_price` int    NOT NULL COMMENT '订单总金额',
+    `user_id`     bigint NOT NULL COMMENT '用戶id',
+    `create_gmt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3
+  ROW_FORMAT = COMPACT;

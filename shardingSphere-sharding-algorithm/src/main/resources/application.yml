@@ -78,6 +78,16 @@ spring:
                 sharding-column: order_price
                 # 分片边界的范围分片算法
                 sharding-algorithm-name: boundary-range-algorithm
+          auto_interval:
+            actual-data-nodes: ds0.auto_interval$->{0..4}
+            key-generate-strategy:
+              column: order_id
+              key-generator-name: global-id-snowflake
+            table-strategy:
+              standard:
+                # 自动日期分片算法
+                sharding-algorithm-name: auto_interval_algorithm
+                sharding-column: create_gmt
 
         sharding-algorithms:
           # 取模分片算法
@@ -100,6 +110,13 @@ spring:
             type: BOUNDARY_RANGE
             props:
               sharding-ranges: 0,10,20
+          auto_interval_algorithm:
+            type: AUTO_INTERVAL
+            props:
+              datetime-lower: '2024-01-03 00:00:00'
+              datetime-upper: '2024-01-03 03:00:00'
+              sharding-seconds: 3600
+
 
         key-generators:
           global-id-snowflake:
