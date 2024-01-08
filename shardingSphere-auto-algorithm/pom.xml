@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 
-	<artifactId>shardingSphere-sharding-algorithm</artifactId>
+	<artifactId>shardingSphere-auto-algorithm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shardingSphere-sharding-algorithm</name>
 	<description>shardingSphere-sharding-algorithm</description>
