@@ -1,2 +1,2 @@
 # shardingSphere-sharding-algorithm
-shardingSphere 分片算法使用
+shardingSphere 自动分片算法使用
