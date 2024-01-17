@@ -110,7 +110,6 @@ spring:
           database-key-auto-mod:
             type: MOD
             props:
-
               sharding-count: 2
           # 自动分片 by hash取模
           table-key-hash-mod:
