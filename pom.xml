@@ -13,7 +13,7 @@
   <modules>
     <module>shardingSphere-simple</module>
     <module>shardingSphere-auto-algorithm</module>
-    <module>shardingSphere-standard-algorithm</module>
+    <module>shardingSphere-other-algorithm</module>
   </modules>
   <packaging>pom</packaging>
 

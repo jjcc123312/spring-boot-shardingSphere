@@ -1,0 +1,152 @@
+logging:
+  level:
+    com.study: info
+
+spring:
+  application:
+    name: shardingSphere-sharding-algorithm
+
+  shardingsphere:
+    # 将运行模式配置为Standalone单机模式（Cluster：集群模式）
+    mode:
+      type: Standalone
+      repository:
+        type: JDBC
+    props:
+      # 日志显示具体的SQL
+      sql-show: true
+    # 配置多个数据源
+    datasource:
+      #      真实数据源名称
+      names: ds0,ds1
+      #      druid数据库连接池配置
+      common: &common
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        max-active: 500
+        initial-size: 3
+        min-idle: 3
+        max-wait: 60000
+        remove-abandoned: true
+        remove-abandoned-timeout: 300
+        log-abandoned: true
+      # 配置第一个数据源
+      ds0:
+        #        引用common配置
+        <<: *common
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db_sharding_01?useUnicode=true&useSSL=false&characterEncoding=utf8
+        username: root
+        password: 123456
+
+      # 配置第二个数据源
+      ds1:
+        # 引用common配置
+        <<: *common
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db_sharding_02?useUnicode=true&useSSL=false&characterEncoding=utf8
+        username: root
+        password: 123456
+
+    rules:
+      sharding:
+        tables:
+#          shoping:
+#            # 申明真实节点
+#            actual-data-nodes: ds$->{0..1}.shoping_0$->{0..1}
+#            # 主键生成规则
+#            key-generate-strategy:
+#              column: shoping_id
+#              key-generator-name: global-id-snowflake
+#            # 库分片策略
+#            database-strategy:
+#              standard:
+#                sharding-column: shoping_id
+#                sharding-algorithm-name: database-key-mod
+#            # 表分片策略
+#            table-strategy:
+#              standard:
+#                sharding-column: shoping_name
+#                sharding-algorithm-name: table-key-hash-mod
+          shoping:
+            actual-data-nodes: ds$->{0..1}.shoping_0$->{0..1}
+            key-generate-strategy:
+              column: shoping_id
+              key-generator-name: global-id-snowflake
+            database-strategy:
+              complex:
+                sharding-columns: shoping_id,shoping_price
+                sharding-algorithm-name: database-key-complex
+            table-strategy:
+              complex:
+                sharding-columns: shoping_id,shoping_price
+                sharding-algorithm-name: table-key-complex
+          volume_range:
+            actual-data-nodes: ds$->{0..1}.volume_range_$->{0..3}
+            key-generate-strategy:
+              column: order_id
+              key-generator-name: global-id-snowflake
+            database-strategy:
+              hint:
+                sharding-algorithm-name: database-key-hint
+            table-strategy:
+              hint:
+                sharding-algorithm-name: table-key-hint
+
+        key-generators:
+          global-id-snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 100
+        sharding-algorithms:
+          # 标准分片 by inline
+          database-key-mod:
+            type: INLINE
+            props:
+              algorithm-expression: ds$->{shoping_id % 2}
+          database-key-auto-mod:
+            type: MOD
+            props:
+              sharding-count: 2
+          # 自动分片 by hash取模
+          table-key-hash-mod:
+            type: HASH_MOD
+            props:
+              sharding-count: 2
+          # 复合分片
+          database-key-complex:
+            type: COMPLEX_INLINE
+            props:
+              sharding-columns: shoping_id,shoping_price
+              algorithm-expression: ds$->{(shoping_id * shoping_price) % 2}
+          table-key-complex:
+            type: COMPLEX_INLINE
+            props:
+              sharding-columns: shoping_id,shoping_price
+              algorithm-expression: shoping_0$->{(shoping_id + shoping_price) % 2}
+          # 强制路由
+          table-key-hint:
+            type: HINT_INLINE
+            props:
+              algorithm-expression: volume_range_$->{value}
+          database-key-hint:
+            type: HINT_INLINE
+            props:
+              algorithm-expression: ds$->{value}
+
+
+
+# mybatis-plus 配置内容
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 虽然默认为 true ，但是还是显示去指定下。
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+  global-config:
+    db-config:
+      id-type: none # 虽然 MyBatis Plus 也提供 ID 生成策略，但是还是使用 Sharding-JDBC 的
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  mapper-locations: classpath*:mapper/*.xml
