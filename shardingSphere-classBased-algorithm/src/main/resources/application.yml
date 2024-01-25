@@ -54,88 +54,35 @@ spring:
     rules:
       sharding:
         tables:
-#          shoping:
-#            # 申明真实节点
-#            actual-data-nodes: ds$->{0..1}.shoping_0$->{0..1}
-#            # 主键生成规则
-#            key-generate-strategy:
-#              column: shoping_id
-#              key-generator-name: global-id-snowflake
-#            # 库分片策略
-#            database-strategy:
-#              standard:
-#                sharding-column: shoping_id
-#                sharding-algorithm-name: database-key-mod
-#            # 表分片策略
-#            table-strategy:
-#              standard:
-#                sharding-column: shoping_name
-#                sharding-algorithm-name: table-key-hash-mod
           shoping:
             actual-data-nodes: ds$->{0..1}.shoping_0$->{0..1}
+            database-strategy:
+              standard:
+                sharding-column: shoping_id
+                sharding-algorithm-name: class-based-standard-precise
+            table-strategy:
+              standard:
+                sharding-column: shoping_id
+                sharding-algorithm-name: class-based-standard-precise
             key-generate-strategy:
+              # 声明主键为shoping_id
               column: shoping_id
+              # 同样指向global-id-snowflake这个具体的主键生成策略
               key-generator-name: global-id-snowflake
-            database-strategy:
-              complex:
-                sharding-columns: shoping_id,shoping_price
-                sharding-algorithm-name: database-key-complex
-            table-strategy:
-              complex:
-                sharding-columns: shoping_id,shoping_price
-                sharding-algorithm-name: table-key-complex
-          volume_range:
-            actual-data-nodes: ds$->{0..1}.volume_range_$->{0..3}
-            key-generate-strategy:
-              column: order_id
-              key-generator-name: global-id-snowflake
-            database-strategy:
-              hint:
-                sharding-algorithm-name: database-key-hint
-            table-strategy:
-              hint:
-                sharding-algorithm-name: table-key-hint
+        sharding-algorithms:
+          class-based-standard-precise:
+            type: CLASS_BASED
+            props:
+              strategy: STANDARD
+              algorithmClassName: com.study.config.classbased.CustomStandardShardingAlgorithm
+
 
         key-generators:
           global-id-snowflake:
             type: SNOWFLAKE
             props:
-              worker-id: 100
-        sharding-algorithms:
-          # 标准分片 by inline
-          database-key-mod:
-            type: INLINE
-            props:
-              algorithm-expression: ds$->{shoping_id % 2}
-          database-key-auto-mod:
-            type: MOD
-            props:
-              sharding-count: 2
-          # 自动分片 by hash取模
-          table-key-hash-mod:
-            type: HASH_MOD
-            props:
-              sharding-count: 2
-          # 复合分片
-          database-key-complex:
-            type: COMPLEX_INLINE
-            props:
-              sharding-columns: shoping_id,shoping_price
-              algorithm-expression: ds$->{(shoping_id * shoping_price) % 2}
-          table-key-complex:
-            type: COMPLEX_INLINE
-            props:
-              sharding-columns: shoping_id,shoping_price
-              algorithm-expression: shoping_0$->{(shoping_id + shoping_price) % 2}
-          # 强制路由
-          table-key-hint:
-            type: HINT_INLINE
-            props:
-              algorithm-expression: volume_range_$->{value}
-          database-key-hint:
-            type: HINT_INLINE
-            props:
-              algorithm-expression: ds$->{value}
+              # 分配一个工作节点ID（要确保全局唯一）
+              worker-id: 110
 
 
 
