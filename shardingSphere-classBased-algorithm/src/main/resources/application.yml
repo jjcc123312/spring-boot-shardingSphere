@@ -59,23 +59,54 @@ spring:
             database-strategy:
               standard:
                 sharding-column: shoping_id
-                sharding-algorithm-name: class-based-standard-precise
+                sharding-algorithm-name: class-based-standard
             table-strategy:
               standard:
                 sharding-column: shoping_id
-                sharding-algorithm-name: class-based-standard-precise
+                sharding-algorithm-name: class-based-standard
             key-generate-strategy:
               # 声明主键为shoping_id
               column: shoping_id
               # 同样指向global-id-snowflake这个具体的主键生成策略
               key-generator-name: global-id-snowflake
+          volume_range:
+            actual-data-nodes: ds0.volume_range_$->{0..3}
+            key-generate-strategy:
+              column: order_id
+              # 同样指向global-id-snowflake这个具体的主键生成策略
+              key-generator-name: global-id-snowflake
+            table-strategy:
+              complex:
+                sharding-columns: order_id,user_id
+                sharding-algorithm-name: class-based-complex
+          boundary_range:
+            actual-data-nodes: ds0.boundary_range$->{0..3}
+            key-generate-strategy:
+              column: order_id
+              # 同样指向global-id-snowflake这个具体的主键生成策略
+              key-generator-name: global-id-snowflake
+            table-strategy:
+              hint:
+                sharding-algorithm-name: class-based-hint
+
         sharding-algorithms:
-          class-based-standard-precise:
+          # 自定义标准分片算法
+          class-based-standard:
             type: CLASS_BASED
             props:
               strategy: STANDARD
               algorithmClassName: com.study.config.classbased.CustomStandardShardingAlgorithm
-
+          class-based-complex:
+            # 自定义复合分片算法
+            type: CLASS_BASED
+            props:
+              strategy: COMPLEX
+              algorithmClassName: com.study.config.classbased.CustomComplexKeysShardingAlgorithm
+          class-based-hint:
+            type: CLASS_BASED
+            props:
+              strategy: HINT
+              algorithmClassName: com.study.config.classbased.CustomHintShardingAlgorithm
 
         key-generators:
           global-id-snowflake:
